@@ -5,6 +5,7 @@ import com.futao.api.model.order.Order;
 import com.futao.api.model.user.User;
 import com.futao.api.service.OrderService;
 import com.futao.api.service.UserService;
+import com.futao.starter.fustack.auth.annotations.SkipUserAuth;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Method;
 import org.apache.dubbo.config.annotation.Reference;
@@ -32,12 +33,12 @@ public class Controller {
      */
     @Reference(check = true,
             init = true
-//            , methods = {
-//            @Method(name = "listOrderByUserId",
-//                    async = true,
-//                    oninvoke = "controller.beforeOrders",
-//                    onreturn = "controller.afterOrders",
-//                    onthrow = "controller.onOrdersThrow")}
+            , methods = {
+            @Method(name = "listOrderByUserId",
+                    async = true,
+                    oninvoke = "orderCallback.beforeOrders",
+                    onreturn = "orderCallback.afterOrders",
+                    onthrow = "orderCallback.onOrdersThrow")}
     )
     private OrderService orderService;
 
@@ -46,23 +47,17 @@ public class Controller {
         return userService.listUsers();
     }
 
+    @SkipUserAuth
     @GetMapping("/orders")
     public List<Order> orders(@RequestParam(required = false) Long id) {
-        // TODO: 2021/1/8 获取的context里面的值都是空的，why
         RpcContext context = RpcContext.getContext();
         System.out.println(context.getRemoteApplicationName());
-        return orderService.listOrderByUserId(id);
+        List<Order> orders = orderService.listOrderByUserId(id);
+        // 调用之后才有值
+        RpcContext context2 = RpcContext.getContext();
+        System.out.println(context2.getRemoteApplicationName());
+        return orders;
     }
 
-    public void beforeOrders(Long id) {
-        log.info("beforeOrders:{}", id);
-    }
 
-    public void afterOrders(List<Order> orders) {
-        log.info("beforeOrders:{}", JSON.toJSONString(orders));
-    }
-
-    public void onOrdersThrow(Throwable throwable, Object o) {
-        log.info("onOrdersThrow:{}", JSON.toJSONString(o), throwable);
-    }
 }
