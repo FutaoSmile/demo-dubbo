@@ -22,6 +22,15 @@
 * Maven
 * SpringBoot
 * Dubbo
+  * Zookeeper
 * Freemarker (demo-dubbo-web)
+
+### # 开发过程:
+1. 先在`demo-dubbo-api`中定义Model和Service接口。
+2. 再在服务提供者`demo-dubbo-order`/`demo-dubbo-user`中实现步骤1中定义的接口。
+3. 将步骤2的接口实现通过dubbo暴露出来(标记`@org.apache.dubbo.config.annotation.Service`)。
+4. 在`demo-dubbo-web`中使用`org.apache.dubbo.config.annotation.Reference`注入在`demo-dubbo-api`中定义的接口，dubbo将自动调用相应的实现。
+
+
 
 ### Next http://dubbo.apache.org/zh/docs/v2.7/user/examples/events-notify/
