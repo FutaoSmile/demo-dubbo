@@ -1,9 +1,9 @@
 > 项目来源:
 >
 > 坑爹的公司项目用Dubbo+Freemarker+Layui服务端渲染。
-> 
+>
 > 钱难赚，屎难吃。
-> 
+>
 > 学习中...
 
 ### # 模块之间的关系
@@ -21,16 +21,23 @@
 * JDK 1.8
 * Maven
 * SpringBoot
-* Dubbo
-  * Zookeeper
-* Freemarker (demo-dubbo-web)
+* [Dubbo](http://dubbo.apache.org/zh/docs/v2.7/)
+    * Zookeeper
+* [Freemarker](http://freemarker.foofun.cn/) (demo-dubbo-web)
+    * freemarker可通过`FreeMarkerConfigurer`设置自动import和include的页面，还有一些其他设置，springboot并未完全覆盖所有的freemarker配置。  
 
 ### # 开发过程:
+
 1. 先在`demo-dubbo-api`中定义Model和Service接口。
 2. 再在服务提供者`demo-dubbo-order`/`demo-dubbo-user`中实现步骤1中定义的接口。
 3. 将步骤2的接口实现通过dubbo暴露出来(标记`@org.apache.dubbo.config.annotation.Service`)。
 4. 在`demo-dubbo-web`中使用`org.apache.dubbo.config.annotation.Reference`注入在`demo-dubbo-api`中定义的接口，dubbo将自动调用相应的实现。
 
+### # TODO
+
+* 事件通知，未实现。http://dubbo.apache.org/zh/docs/v2.7/user/examples/events-notify/
 
 
-### Next http://dubbo.apache.org/zh/docs/v2.7/user/examples/events-notify/
+### # 断点续传:
+* dubbo: http://dubbo.apache.org/zh/docs/v2.7/user/examples/events-notify/
+* freemarker: http://freemarker.foofun.cn/dgui_misc_namespace.html
