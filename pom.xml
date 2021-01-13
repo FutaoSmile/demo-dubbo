@@ -44,6 +44,16 @@
                 <artifactId>fustack-auth</artifactId>
                 <version>${fustack.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.futao</groupId>
+                <artifactId>fustack-utils</artifactId>
+                <version>${fustack.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.futao</groupId>
+                <artifactId>fustack-freemarker</artifactId>
+                <version>${fustack.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

@@ -22,9 +22,10 @@
 * Maven
 * SpringBoot
 * [Dubbo](http://dubbo.apache.org/zh/docs/v2.7/)
-    * Zookeeper
+  * Zookeeper
 * [Freemarker](http://freemarker.foofun.cn/) (demo-dubbo-web)
-    * freemarker可通过`FreeMarkerConfigurer`设置自动import和include的页面，还有一些其他设置，springboot并未完全覆盖所有的freemarker配置。  
+  * freemarker可通过`FreeMarkerConfigurer`设置自动import和include的页面，还有一些其他设置，springboot并未完全覆盖所有的freemarker配置。
+  * 自定义方法 http://freemarker.foofun.cn/pgui_datamodel_method.html
 
 ### # 开发过程:
 
@@ -40,4 +41,4 @@
 
 ### # 断点续传:
 * dubbo: http://dubbo.apache.org/zh/docs/v2.7/user/examples/events-notify/
-* freemarker: http://freemarker.foofun.cn/dgui_misc_namespace.html
+* freemarker: http://freemarker.foofun.cn/ref.html

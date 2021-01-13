@@ -8,7 +8,7 @@
     <title>首页</title>
 </head>
 <body>
-<H1>Hello ${user.username}</H1>
+<H1>Hello ${user.username!'无名氏'}</H1>
 <p>性别:
     <#--条件渲染-->
     <#if user.gender==1>
@@ -35,18 +35,20 @@
             <td>${order.totalPrice}</td>
             <td>${order.status}</td>
             <#--对于空值的处理 !表示前面的值不存在时取后面的默认值，??用于判定是否是空，返回一个boolean值，一般和if共用-->
-            <td>${order.createDateTime!"--"}</td>
+            <td>${order.createDateTime}</td>
+            <#--<td>${localDateTimeFormatter(order.createDateTime,"yyyy-MM-dd HH:mm:ss")!""}</td>-->
         </tr>
     </#list>
 </table>
 <#--内建函数，使用?来调用，而不是.  全部内建函数: http://freemarker.foofun.cn/ref_builtins.html-->
 <p>英文姓名:${user.englishName?upper_case}</p>
 <p>${user.orderList?join(",")?html}</p>
-<#include "./macro/greet.ftl" />
-<@greet name='futao' color='red'/>
+<#--使用<#import as /> 而不是<#include/> 这样可以保持命名空间不被污染-->
+<#import "./macro/greet.ftl" as grt/>
+<@grt.greet name='futao' color='red'/>
 <h2>自定义指令：模板</h2>
-<#include './macro/tableTemplate.ftl'/>
-<@tableTemplate  headers=['用户ID','总价','订单状态','创建时间']  orders=user.orderList />
+<#import './macro/tableTemplate.ftl' as tt/>
+<@tt.tableTemplate  headers=['用户ID','总价','订单状态','创建时间']  orders=user.orderList />
 <#--插入其他文件内容-->
 <#include "./layout/footer.html"/>
 </body>
