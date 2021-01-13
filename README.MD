@@ -22,10 +22,10 @@
 * Maven
 * SpringBoot
 * [Dubbo](http://dubbo.apache.org/zh/docs/v2.7/)
-  * Zookeeper
+    * Zookeeper
 * [Freemarker](http://freemarker.foofun.cn/) (demo-dubbo-web)
-  * freemarker可通过`FreeMarkerConfigurer`设置自动import和include的页面，还有一些其他设置，springboot并未完全覆盖所有的freemarker配置。
-  * 自定义方法 http://freemarker.foofun.cn/pgui_datamodel_method.html
+    * freemarker可通过`FreeMarkerConfigurer`设置自动import和include的页面，还有一些其他设置，springboot并未完全覆盖所有的freemarker配置。
+    * 自定义方法 http://freemarker.foofun.cn/pgui_datamodel_method.html
 
 ### # 开发过程:
 
@@ -34,11 +34,20 @@
 3. 将步骤2的接口实现通过dubbo暴露出来(标记`@org.apache.dubbo.config.annotation.Service`)。
 4. 在`demo-dubbo-web`中使用`org.apache.dubbo.config.annotation.Reference`注入在`demo-dubbo-api`中定义的接口，dubbo将自动调用相应的实现。
 
+### # 已实现案例:
+* Dubbo
+  * 基于注解的Dubbo使用
+  * 本地存根
+  * 消费者直连
 ### # TODO
 
 * 事件通知，未实现。http://dubbo.apache.org/zh/docs/v2.7/user/examples/events-notify/
 
-
 ### # 断点续传:
+
 * dubbo: http://dubbo.apache.org/zh/docs/v2.7/user/examples/events-notify/
 * freemarker: http://freemarker.foofun.cn/ref.html
+
+### # 其他知识点
+* 注册中心Zookeeper在使用过程中宕机了，也不会影响Dubbo服务的正常运行，因为Dubbo会缓存provider信息。
+* consumer绕过注册中心直连provider: `@Reference(url = "dubbo://..:1")`
