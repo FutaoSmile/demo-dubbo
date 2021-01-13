@@ -9,7 +9,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  * @author futao
  * @date 2021/1/6
  */
-@EnableDubbo(scanBasePackages = "com.futao.dubbo.user.service")
+@EnableDubbo(scanBasePackages = "com.futao.dubbo.user")
 @SpringBootApplication
 @ServletComponentScan
 public class UserApp {
