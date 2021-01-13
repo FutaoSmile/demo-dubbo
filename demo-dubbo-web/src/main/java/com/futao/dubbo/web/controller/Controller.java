@@ -20,11 +20,12 @@ import java.util.List;
  * @author futao
  * @date 2021/1/7
  */
+@SkipUserAuth
 @Slf4j
 @RestController("controller")
 public class Controller {
 
-    @Reference()
+    @Reference(stub = "com.futao.dubbo.web.service.UserServiceImpl")
     private UserService userService;
 
     /**
