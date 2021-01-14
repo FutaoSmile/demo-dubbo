@@ -39,6 +39,7 @@
   * 基于注解的Dubbo使用
   * 本地存根
   * 消费者直连
+  * Dubbo对文件传输的兼容性
 ### # TODO
 
 * 事件通知，未实现。http://dubbo.apache.org/zh/docs/v2.7/user/examples/events-notify/
